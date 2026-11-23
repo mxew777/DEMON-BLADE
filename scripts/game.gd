@@ -221,7 +221,7 @@ func _draw_enemy() -> void:
 	# spectral aura
 	for i in range(5, 0, -1):
 		draw_circle(p, 17.0 + i * 6.0, Color(0.65, 0.08, 0.34, 0.018))
-	draw_ellipse(p + Vector2(0, 22), Vector2(23, 8), Color(0.02, 0.01, 0.04, 0.7))
+	_draw_ellipse(p + Vector2(0, 22), Vector2(23, 8), Color(0.02, 0.01, 0.04, 0.7))
 	var body := Color("#a52c67") if enemy_hit_flash > 0.0 else Color("#492344")
 	var cloak := PackedVector2Array([p + Vector2(0, -27), p + Vector2(19, -8), p + Vector2(15, 17), p + Vector2(7, 29), p + Vector2(1, 18), p + Vector2(-7, 30), p + Vector2(-17, 14), p + Vector2(-20, -8)])
 	draw_colored_polygon(cloak, body)
@@ -240,7 +240,7 @@ func _draw_player() -> void:
 	if player_hit_flash > 0.0 and int(elapsed * 30.0) % 2 == 0:
 		return
 	# ground shadow and red rim light
-	draw_ellipse(p + Vector2(0, 22), Vector2(23, 8), Color(0.01, 0.008, 0.02, 0.75))
+	_draw_ellipse(p + Vector2(0, 22), Vector2(23, 8), Color(0.01, 0.008, 0.02, 0.75))
 	draw_circle(p + Vector2(0, 2), 28.0, Color(0.72, 0.08, 0.20, 0.045))
 	# long dark coat
 	draw_colored_polygon(PackedVector2Array([p + Vector2(-13, -5), p + Vector2(12, -5), p + Vector2(18, 20), p + Vector2(8, 27), p + Vector2(0, 19), p + Vector2(-9, 28), p + Vector2(-18, 18)]), Color("#321d32"))
@@ -264,7 +264,7 @@ func _draw_player() -> void:
 		draw_arc(arc_center, 48.0 if combo_step == 3 else 39.0, slash_angle - 1.15, slash_angle + 1.15, 36, Color(1.0, 0.18, 0.34, alpha), 7.0 if combo_step == 3 else 4.0)
 		draw_arc(arc_center, 55.0, slash_angle - 0.95, slash_angle + 0.95, 36, Color(1.0, 0.72, 0.78, alpha * 0.55), 2.0)
 
-func _draw_ellipse(center: Vector2, radii: Vector2, color: Color) -> void:
+func __draw_ellipse(center: Vector2, radii: Vector2, color: Color) -> void:
 	var points := PackedVector2Array()
 	for i in range(25):
 		var a := TAU * float(i) / 24.0
