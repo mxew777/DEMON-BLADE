@@ -15,11 +15,11 @@ class MainActivity : Activity() {
         window.decorView.systemUiVisibility =
             View.SYSTEM_UI_FLAG_FULLSCREEN or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION or
             View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY or View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-        setContentView(ExploreView())
+        setContentView(ExploreView(this))
     }
 }
 
-private class ExploreView : View {
+private class ExploreView(context: android.content.Context) : View(context) {
     private val p = Paint(Paint.ANTI_ALIAS_FLAG)
     private var px = 0f
     private var py = 0f
@@ -29,9 +29,6 @@ private class ExploreView : View {
     private var score = 0
     private val motes = ArrayList<Pair<Float, Float>>()
     private val collected = BooleanArray(6)
-
-    constructor() : super(null)
-    constructor(context: android.content.Context) : super(context)
 
     override fun onDraw(c: Canvas) {
         super.onDraw(c)
